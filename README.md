@@ -1,48 +1,284 @@
-# Astro Starter Kit: Basics
+# Astro 游戏展示网站
 
-```sh
-npm create astro@latest -- --template basics
-```
+本文档旨在指导你完成此特定项目的开发工作。请将本 `README.md` 作为首要参考，其中包含了项目的具体配置、开发流程和任务。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+**目标用户：** 不太懂技术的初中生
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**项目目标：** 创建一个基于配置的、展示单个游戏的 Astro 网站。网站需要具备良好的移动优先体验，并尽可能符合无障碍标准。
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+**核心原则：**
 
-## 🚀 Project Structure
+- **Ship Fast:** 快速迭代，尽早交付可用版本。
+- **移动优先设计:** 优先考虑移动设备上的用户体验。
+- **YAGNI (You Ain't Gonna Need It):** 只实现当前明确需要的功能，避免过度设计。
+- **最小必要的无障碍:** 在满足基本无障碍要求的前提下，保持开发的简洁性。
+- **配置驱动:** 网站的内容和行为主要通过配置文件来定义。
 
-Inside of your Astro project, you'll see the following folders and files:
+## 项目结构
 
-```text
-/
-├── public/
-│   └── favicon.svg
+```plaintext
+astro-game-portal/
+├── public/              # 静态资源 (例如图片)
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # 可复用的 UI 组件
+│   ├── layouts/        # 页面布局组件
+│   ├── pages/          # 网站页面
+│   │   └── index.astro # 网站首页
+│   └── config.json     # 游戏和网站配置 (可根据需要选择 YAML 等其他格式)
+├── astro.config.mjs    # Astro 配置文件
+├── package.json
+├── tsconfig.json       # TypeScript 配置文件
+└── README.md           # 当前文档
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 快速开始
 
-## 🧞 Commands
+1. **克隆代码仓库:** (如果适用)
 
-All commands are run from the root of the project, from a terminal:
+   ```bash
+   git clone [你的仓库地址]
+   cd astro-game-portal
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+2. **安装依赖:**
 
-## 👀 Want to learn more?
+   ```bash
+   npm install  # 或 pnpm install 或 yarn install
+   ```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+3. **启动开发服务器:**
+
+   ```bash
+   npm run dev  # 或 pnpm run dev 或 yarn run dev
+   ```
+
+   访问浏览器显示的地址，通常是 `http://localhost:4321/`。
+
+## 配置文件 (src/config.json)
+
+网站的核心内容通过 `src/config.json` 文件进行配置。以下是一个示例配置：
+
+```json
+{
+  "game": {
+    "iframeSrc": "https://example.com/your-game",
+    "title": "我的酷炫游戏",
+    "description": "这是一个非常有趣的游戏！",
+    "sandboxAttributes": "allow-popups allow-scripts allow-same-origin",
+    "referrerPolicy": "origin"
+  },
+  "website": {
+    "title": "游戏中心",
+    "defaultLanguage": "en",
+    "shareText": "一起来玩这个超棒的游戏吧！[链接]"
+  },
+  "i18n": {
+    "en": {
+      "welcomeMessage": "Welcome to the Game Portal!",
+      "retryButton": "Retry",
+      "shareButton": "Share"
+    },
+    "zh": {
+      "welcomeMessage": "欢迎来到游戏中心！",
+      "retryButton": "重试",
+      "shareButton": "分享"
+    },
+    "jp": {
+      "welcomeMessage": "ゲームポータルへようこそ！",
+      "retryButton": "再試行",
+      "shareButton": "シェア"
+    }
+  }
+}
+```
+
+**配置项说明:**
+
+- **`game`:**
+
+  - `iframeSrc`: **[必填]** 要嵌入的游戏的 URL 地址。
+  - `title`: 游戏的名称，用于 SEO 和其他显示。
+  - `description`: 游戏的简短描述，用于 SEO。
+  - `sandboxAttributes`: `<iframe>` 标签的 `sandbox` 属性值，用于增强安全性。请根据游戏来源谨慎配置。
+  - `referrerPolicy`: `<iframe>` 标签的 `referrerpolicy` 属性值。
+
+- **`website`:**
+
+  - `title`: 网站的通用标题。
+  - `defaultLanguage`: 网站的默认语言 (例如: "en", "zh", "jp")。
+  - `shareText`: 分享链接时使用的文本模板，`[链接]` 会被替换为当前页面 URL。
+
+- **`i18n`:** 不同语言版本的文本内容。
+  - `en`, `zh`, `jp`: 语言代码作为键。
+  - 每个语言对象包含需要在页面上显示的文本。
+
+**请根据你的实际游戏链接和网站信息修改此配置文件。**
+
+## 开发指南
+
+1. **阅读 `cursorrules3` 文档:** 熟悉项目的开发原则和最佳实践。
+
+2. **理解需求:** 确保理解项目目标和所有已确定的需求。
+
+3. **移动优先:** 在编写 CSS 样式时，优先考虑在移动设备上的显示效果。
+
+4. **使用 Astro 组件:** 利用 Astro 的组件化能力构建 UI。
+
+5. **配置驱动开发:** 从 `config.json` 文件中读取数据，动态渲染页面内容。
+
+6. **实现 Iframe 嵌入:** 使用 `<iframe>` 标签嵌入游戏，并配置相应的属性 (如 `src`, `title`, `sandbox`, `referrerpolicy`)。
+
+7. **处理 Iframe 加载状态:**
+
+   - 不需要显示加载动画。
+   - 使用 JavaScript 监听 `<iframe>` 的 `error` 事件，当加载失败时显示错误信息和重试按钮。
+
+8. **SEO 优化:**
+
+   - 动态设置 `<title>` 标签，例如：`[游戏名称] - 游戏中心`。
+   - 添加 `<meta name="description">` 标签，描述网站内容。
+
+9. **实现分享功能:** 添加一个按钮或链接，用户点击后可以复制链接或通过浏览器分享 API 分享当前页面 URL。
+
+10. **性能优化:**
+
+    - 确保 CSS 和 JS 文件在构建时被压缩。
+    - 合理设置 HTTP 缓存头。
+    - 考虑使用 `loading="lazy"` 属性懒加载 `<iframe>`。
+
+11. **安全性:**
+
+    - 仔细评估嵌入游戏的来源，并设置合适的 `sandbox` 属性。
+    - 设置合适的 `referrerpolicy` 属性。
+
+12. **无障碍:**
+
+    - 根据当前语言设置 `<html>` 标签的 `lang` 属性。
+    - 为所有用户可见的文本提供多语言版本。
+    - 为 `<iframe>` 提供有意义的 `title` 属性。
+    - 确保键盘用户可以清晰地看到焦点，并可以使用键盘进行导航。
+    - 使用工具检查颜色对比度。
+    - 尽可能使用语义化的 HTML 标签。
+
+13. **代码组织:** 保持代码结构的清晰和一致性，编写必要的注释。
+
+14. **国际化 (i18n):** 使用合适的 i18n 库 (例如 `@astrojs/i18n` 或 `astro-i18next`)，根据配置文件中的 `i18n` 部分加载不同语言的文本。
+
+## 常见问题（FAQ）
+
+### 1. 基础问题
+
+Q: 为什么我需要使用这个项目？
+A: 这个项目可以帮助你快速创建一个展示游戏的网站，无需深入了解技术细节，通过简单的配置就能完成。
+
+Q: 我需要懂编程才能使用吗？
+A: 不需要。你只需要按照文档修改配置文件（`src/config.json`）即可。主要配置包括游戏链接、网站标题和多语言文本等。
+
+Q: 如何修改配置文件？
+A: 使用任何文本编辑器打开 `src/config.json`，按照本文档"配置文件"章节的说明修改相应内容即可。注意保持 JSON 格式的正确性。
+
+### 2. 部署相关
+
+Q: 如何让别人访问我的网站？
+A: 你需要将网站部署到服务器上。推荐使用 Vercel、Netlify 等平台，它们提供免费托管服务，并且有详细的部署指南。
+
+Q: 网站支持手机访问吗？
+A: 支持。网站采用移动优先设计，在手机上会自动适配屏幕大小，提供良好的浏览体验。
+
+### 3. 游戏相关
+
+Q: 支持什么类型的游戏？
+A: 支持任何可以通过 iframe 嵌入的网页游戏。游戏需要有一个可访问的 URL 地址。
+
+Q: 游戏加载不出来怎么办？
+A: 请检查：
+
+1. 游戏链接（`iframeSrc`）是否正确
+2. 游戏网站是否允许被嵌入（部分网站可能禁止嵌入）
+3. 网络连接是否正常
+
+### 4. 多语言支持
+
+Q: 如何添加新的语言？
+A: 在配置文件的 `i18n` 部分添加新的语言对象，参考已有的语言配置格式。例如添加韩语：
+
+```json
+"kr": {
+    "welcomeMessage": "게임 포털에 오신 것을 환영합니다!",
+    "retryButton": "다시 시도",
+    "shareButton": "공유"
+}
+```
+
+Q: 网站会自动翻译内容吗？
+A: 不会。你需要在配置文件中手动提供每种语言的翻译文本。建议使用专业翻译服务或找懂该语言的人帮助翻译。
+
+### 5. 常见错误
+
+Q: 修改配置后网站显示错误怎么办？
+A: 常见原因和解决方法：
+
+1. JSON 格式错误：确保所有引号、逗号、大括号都正确匹配
+2. 必填项缺失：确保 `iframeSrc` 等必填项已正确填写
+3. 语言代码错误：使用标准的语言代码（如 "en"、"zh"、"jp"）
+
+Q: 分享功能不能用怎么办？
+A: 检查：
+
+1. 是否使用的是现代浏览器
+2. 如果是在本地开发环境，部分分享功能可能受限
+3. 在手机上使用时，确保已授予相应权限
+
+### 6. 性能优化
+
+Q: 网站加载很慢怎么办？
+A: 可以尝试：
+
+1. 确保游戏资源大小适中
+2. 使用 `loading="lazy"` 属性延迟加载游戏
+3. 检查网络连接质量
+4. 考虑使用更快的托管服务
+
+如果你遇到了其他问题，欢迎通过 Issues 反馈，我们会及时更新这个 FAQ 列表。
+
+## 交付标准
+
+### 开发时间规划
+
+- 预计总工时：5 个工作日
+- 详细进度安排请参考 `PROGRESS.md`
+
+### 代码质量要求
+
+- **功能完整性：**
+
+  - 游戏正常加载和运行
+  - 多语言切换正常工作
+  - 分享功能可用
+  - 错误处理机制有效
+
+- **性能指标：**
+
+  - 页面加载时间 < 3 秒
+  - 首次内容绘制 (FCP) < 2 秒
+  - 累积布局偏移 (CLS) < 0.1
+
+- **代码提交：**
+
+  - 提交信息清晰明了
+  - 关联相关 issue（如果适用）
+  - 通过代码审查
+
+- **文档编写：**
+
+  - 使用 Markdown 格式
+  - 内容准确完整
+  - 及时更新
+
+- **测试要求：**
+  - 跨浏览器兼容性测试通过
+  - 移动设备适配测试通过
+  - 无障碍性测试通过
+  - 性能指标达标
+
+**请认真遵循以上指南进行开发，如有任何问题，及时沟通。 祝你开发顺利！**
