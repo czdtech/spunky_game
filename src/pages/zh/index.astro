@@ -1,14 +1,14 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import GameFeatures from "../components/GameFeatures.astro";
-import FAQ from "../components/FAQ.astro";
-import Footer from "../components/Footer.astro";
-import config from "../config/config.json";
-import i18next from "../i18n/i18n";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import GameFeatures from "../../components/GameFeatures.astro";
+import FAQ from "../../components/FAQ.astro";
+import Footer from "../../components/Footer.astro";
+import config from "../../config/config.json";
+import i18next from "../../i18n/i18n";
 
 const { game } = config;
-await i18next.changeLanguage("en");
+await i18next.changeLanguage("zh");
 const t = i18next.t.bind(i18next);
 ---
 

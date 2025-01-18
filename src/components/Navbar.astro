@@ -1,0 +1,234 @@
+---
+import i18next from "../i18n/i18n";
+const t = i18next.t.bind(i18next);
+
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath === "/";
+
+const languages = [
+  { code: "", name: "English", label: "English" },
+  { code: "zh", name: "中文", label: "中文" },
+];
+
+const currentLang =
+  languages.find(
+    (lang) => currentPath === (lang.code ? `/${lang.code}` : "/")
+  ) || languages[0];
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm"
+  id="navbar"
+>
+  <div
+    class="flex justify-between items-center h-16 px-4 sm:px-6 max-w-[1200px] mx-auto"
+  >
+    <!-- Logo -->
+    <div class="flex-shrink-0">
+      <a href="/" class="text-2xl font-bold text-purple-600">FiddleBops</a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden sm:flex items-center space-x-8">
+      <a
+        href="#how-to-play"
+        class="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+      >
+        {t("nav.howToPlay")}
+      </a>
+      <a
+        href="#features"
+        class="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+      >
+        {t("nav.features")}
+      </a>
+      <a
+        href="#faq"
+        class="text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-colors"
+      >
+        {t("nav.faq")}
+      </a>
+
+      <!-- Language Switcher -->
+      <div class="relative pl-8 border-l border-gray-200">
+        <button
+          type="button"
+          class="language-dropdown-button inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors focus:outline-none"
+          aria-expanded="false"
+        >
+          <span>{currentLang.name}</span>
+          <svg
+            class="h-4 w-4 transition-transform duration-200"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div
+          class="language-dropdown-menu hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1"
+          role="menu"
+        >
+          {
+            languages.map((lang) => (
+              <a
+                href={lang.code ? `/${lang.code}` : "/"}
+                class={`block px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+                  currentLang.code === lang.code
+                    ? "text-purple-600 font-medium"
+                    : "text-gray-700"
+                }`}
+                role="menuitem"
+              >
+                {lang.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu button -->
+    <div class="sm:hidden">
+      <button
+        type="button"
+        class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-600 hover:bg-gray-100 transition-colors"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span class="sr-only">{t("nav.openMenu")}</span>
+        <svg
+          class="block h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="sm:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-white">
+      <a
+        href="#how-to-play"
+        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+      >
+        {t("nav.howToPlay")}
+      </a>
+      <a
+        href="#features"
+        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+      >
+        {t("nav.features")}
+      </a>
+      <a
+        href="#faq"
+        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+      >
+        {t("nav.faq")}
+      </a>
+
+      <!-- Mobile Language Switcher -->
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <div class="px-3">
+          <div class="text-sm font-medium text-gray-500 mb-2">
+            {t("nav.selectLanguage")}
+          </div>
+          <div class="space-y-1">
+            {
+              languages.map((lang) => (
+                <a
+                  href={lang.code ? `/${lang.code}` : "/"}
+                  class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    currentLang.code === lang.code
+                      ? "bg-purple-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {lang.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // 移动端菜单切换
+  const mobileMenuButton = document.querySelector(".mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+    const expanded =
+      mobileMenuButton.getAttribute("aria-expanded") === "true" || false;
+    mobileMenuButton.setAttribute("aria-expanded", (!expanded).toString());
+  });
+
+  // 语言下拉菜单切换
+  const languageButton = document.querySelector(".language-dropdown-button");
+  const languageMenu = document.querySelector(".language-dropdown-menu");
+  const arrow = languageButton?.querySelector("svg");
+
+  languageButton?.addEventListener("click", () => {
+    const expanded = languageButton.getAttribute("aria-expanded") === "true";
+    languageButton.setAttribute("aria-expanded", (!expanded).toString());
+    languageMenu?.classList.toggle("hidden");
+    arrow?.classList.toggle("rotate-180");
+  });
+
+  // 点击外部关闭语言下拉菜单
+  document.addEventListener("click", (event) => {
+    const target = event.target as Node;
+    if (!languageButton?.contains(target) && !languageMenu?.contains(target)) {
+      languageMenu?.classList.add("hidden");
+      languageButton?.setAttribute("aria-expanded", "false");
+      arrow?.classList.remove("rotate-180");
+    }
+  });
+
+  // 导航栏滚动效果
+  let lastScrollY = window.scrollY;
+  const navbar = document.getElementById("navbar");
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (lastScrollY < window.scrollY) {
+        navbar?.classList.add("shadow-md");
+      } else {
+        navbar?.classList.remove("shadow-md");
+      }
+      lastScrollY = window.scrollY;
+    },
+    { passive: true }
+  );
+
+  // 点击导航链接关闭移动端菜单
+  const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
+  mobileMenuLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.add("hidden");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

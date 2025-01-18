@@ -1,0 +1,104 @@
+{
+  "title": "FiddleBops",
+  "welcomeMessage": "Welcome to FiddleBops!",
+  "startButton": "Start Game",
+  "loadingError": "Game loading failed, please retry.",
+  "retryButton": "Retry",
+  "shareButton": "Share",
+  "gameInterface": "Game Interface",
+  "nav": {
+    "howToPlay": "How to Play",
+    "features": "Features",
+    "faq": "FAQ",
+    "openMenu": "Open Menu",
+    "selectLanguage": "Select Language"
+  },
+  "hero": {
+    "title": "FiddleBops",
+    "description": "A fun interactive music learning game"
+  },
+  "features": {
+    "title": "Game Features",
+    "music": {
+      "title": "Fun Music Learning",
+      "description": "Learn music rhythm through interactive gameplay, making music learning fun and easy"
+    },
+    "feedback": {
+      "title": "Instant Feedback",
+      "description": "Get real-time feedback on your performance to help you master the right rhythm and techniques"
+    },
+    "difficulty": {
+      "title": "Progressive Learning",
+      "description": "Start with simple rhythms and gradually increase difficulty as you improve"
+    },
+    "convenience": {
+      "title": "Play Anywhere",
+      "description": "No download required, start your musical journey right in your browser"
+    }
+  },
+  "howToPlay": {
+    "title": "How to Play",
+    "objective": {
+      "title": "Game Objective",
+      "description": "FiddleBops is a musical rhythm game where you create your own beats by combining different sounds and instruments.",
+      "point1": "Create unique musical combinations by selecting different characters",
+      "point2": "Learn rhythm and timing through interactive gameplay",
+      "point3": "Express your creativity by mixing various sound elements"
+    },
+    "controls": {
+      "title": "Game Controls",
+      "basic": {
+        "title": "Basic Controls",
+        "point1": "Click on characters to add their sounds to the mix",
+        "point2": "Click again to remove a sound from the mix",
+        "point3": "Use the play/pause button to control the music"
+      },
+      "advanced": {
+        "title": "Advanced Features",
+        "point1": "Record your mix to save and share with others",
+        "point2": "Combine up to 8 different sounds simultaneously",
+        "point3": "Use the volume slider to adjust individual sound levels"
+      }
+    },
+    "scoring": {
+      "title": "Scoring System",
+      "rule1": "Earn points for creating harmonious sound combinations",
+      "rule2": "Get bonus points for maintaining rhythm and timing",
+      "rule3": "Unlock new characters and sounds as you progress"
+    }
+  },
+  "faq": {
+    "title": "FAQ",
+    "compatibility": {
+      "question": "What devices can I play this game on?",
+      "answer": "FiddleBops is a browser-based game that runs on any modern browser, including computers, tablets, and phones. For the best experience, we recommend using the latest version of Chrome, Firefox, Safari, or Edge."
+    },
+    "prerequisites": {
+      "question": "Do I need musical knowledge to play?",
+      "answer": "Not at all! FiddleBops is designed for music beginners and helps you understand music rhythm through simple and fun gameplay. The game starts with basic rhythms and gradually increases difficulty as you progress."
+    },
+    "tips": {
+      "question": "Any tips for playing the game?",
+      "answer": "1. Start with simple rhythms\n2. Listen to the beat and follow the rhythm\n3. Experiment with different sound combinations\n4. Use headphones for a better experience\n5. Take your time and enjoy the music"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "howToPlay": "How to Play",
+    "features": "Features",
+    "faq": "FAQ",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us",
+    "social": {
+      "twitter": "https://twitter.com/fiddlebops",
+      "github": "https://github.com/fiddlebops",
+      "discord": "https://discord.gg/fiddlebops"
+    },
+    "links": {
+      "privacy": "/privacy",
+      "terms": "/terms",
+      "contact": "/contact"
+    }
+  }
+}

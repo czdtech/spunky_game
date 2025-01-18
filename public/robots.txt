@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://spunky-game.example.com/sitemap.xml 

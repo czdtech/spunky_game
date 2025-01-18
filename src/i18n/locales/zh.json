@@ -1,0 +1,104 @@
+{
+  "title": "FiddleBops",
+  "welcomeMessage": "欢迎来玩 FiddleBops!",
+  "startButton": "开始游戏",
+  "loadingError": "游戏加载失败，请重试。",
+  "retryButton": "重试",
+  "shareButton": "分享",
+  "gameInterface": "游戏界面",
+  "nav": {
+    "howToPlay": "玩法说明",
+    "features": "特色功能",
+    "faq": "常见问题",
+    "openMenu": "打开菜单",
+    "selectLanguage": "选择语言"
+  },
+  "hero": {
+    "title": "FiddleBops",
+    "description": "一个有趣的互动音乐学习游戏"
+  },
+  "features": {
+    "title": "游戏特色",
+    "music": {
+      "title": "趣味音乐学习",
+      "description": "通过互动游戏方式学习音乐节奏，让音乐学习变得有趣而轻松"
+    },
+    "feedback": {
+      "title": "即时反馈机制",
+      "description": "实时显示你的演奏效果，帮助你快速掌握正确的节奏和技巧"
+    },
+    "difficulty": {
+      "title": "循序渐进",
+      "description": "从简单的节奏开始，逐步提升难度，让你在游戏中不断进步"
+    },
+    "convenience": {
+      "title": "随时随地玩",
+      "description": "无需下载安装，打开浏览器即可开始你的音乐之旅"
+    }
+  },
+  "howToPlay": {
+    "title": "玩法说明",
+    "objective": {
+      "title": "游戏目标",
+      "description": "FiddleBops 是一款音乐节奏游戏，你可以通过组合不同的声音和乐器来创作自己的节拍。",
+      "point1": "选择不同的角色创造独特的音乐组合",
+      "point2": "通过互动游戏学习节奏和时机",
+      "point3": "混合各种声音元素，展现你的创造力"
+    },
+    "controls": {
+      "title": "游戏控制",
+      "basic": {
+        "title": "基本操作",
+        "point1": "点击角色将其声音添加到混音中",
+        "point2": "再次点击移除声音",
+        "point3": "使用播放/暂停按钮控制音乐"
+      },
+      "advanced": {
+        "title": "高级功能",
+        "point1": "录制你的混音并与他人分享",
+        "point2": "同时组合最多8种不同的声音",
+        "point3": "使用音量滑块调节各个声音的音量"
+      }
+    },
+    "scoring": {
+      "title": "计分系统",
+      "rule1": "创造和谐的声音组合获得积分",
+      "rule2": "保持节奏和时机获得额外分数",
+      "rule3": "随着进度解锁新角色和声音"
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "compatibility": {
+      "question": "在什么设备上可以玩这个游戏？",
+      "answer": "FiddleBops 是一个基于浏览器的游戏，可以在任何现代浏览器中运行，包括电脑、平板和手机。为了获得最佳体验，我们建议使用 Chrome、Firefox、Safari 或 Edge 的最新版本。"
+    },
+    "prerequisites": {
+      "question": "需要音乐基础才能玩吗？",
+      "answer": "完全不需要！FiddleBops 专为音乐初学者设计，通过简单有趣的方式帮助你了解音乐节奏。游戏会从最基础的节奏开始，随着你的进步逐步增加难度。"
+    },
+    "tips": {
+      "question": "有什么游戏技巧可以分享吗？",
+      "answer": "1. 从简单的节奏开始练习\n2. 注意听节拍，跟随音乐的节奏\n3. 尝试不同的声音组合\n4. 使用耳机可以获得更好的体验\n5. 不要着急，慢慢感受音乐的乐趣"
+    }
+  },
+  "footer": {
+    "rights": "版权所有。",
+    "howToPlay": "玩法介绍",
+    "features": "游戏特色",
+    "faq": "常见问题",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们",
+    "social": {
+      "twitter": "https://twitter.com/fiddlebops",
+      "github": "https://github.com/fiddlebops",
+      "discord": "https://discord.gg/fiddlebops"
+    },
+    "links": {
+      "privacy": "/zh/privacy",
+      "terms": "/zh/terms",
+      "contact": "/zh/contact"
+    }
+  }
+}
