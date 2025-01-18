@@ -3,7 +3,6 @@ import i18next from "../i18n/i18n";
 const t = i18next.t.bind(i18next);
 
 const currentPath = Astro.url.pathname;
-const isEnglish = currentPath === "/";
 
 const languages = [
   { code: "", name: "English", label: "English" },
@@ -11,18 +10,11 @@ const languages = [
 ];
 
 const currentLang =
-  languages.find(
-    (lang) => currentPath === (lang.code ? `/${lang.code}` : "/")
-  ) || languages[0];
+  languages.find((lang) => currentPath === (lang.code ? `/${lang.code}` : "/")) || languages[0];
 ---
 
-<nav
-  class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm"
-  id="navbar"
->
-  <div
-    class="flex justify-between items-center h-16 px-4 sm:px-6 max-w-[1200px] mx-auto"
-  >
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm" id="navbar">
+  <div class="flex justify-between items-center h-16 px-4 sm:px-6 max-w-[1200px] mx-auto">
     <!-- Logo -->
     <div class="flex-shrink-0">
       <a href="/" class="text-2xl font-bold text-purple-600">FiddleBops</a>
@@ -64,11 +56,8 @@ const currentLang =
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+            ></path>
           </svg>
         </button>
         <!-- Dropdown menu -->
@@ -81,9 +70,7 @@ const currentLang =
               <a
                 href={lang.code ? `/${lang.code}` : "/"}
                 class={`block px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
-                  currentLang.code === lang.code
-                    ? "text-purple-600 font-medium"
-                    : "text-gray-700"
+                  currentLang.code === lang.code ? "text-purple-600 font-medium" : "text-gray-700"
                 }`}
                 role="menuitem"
               >
@@ -179,8 +166,7 @@ const currentLang =
 
   mobileMenuButton?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("hidden");
-    const expanded =
-      mobileMenuButton.getAttribute("aria-expanded") === "true" || false;
+    const expanded = mobileMenuButton.getAttribute("aria-expanded") === "true" || false;
     mobileMenuButton.setAttribute("aria-expanded", (!expanded).toString());
   });
 

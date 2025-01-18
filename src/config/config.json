@@ -4,25 +4,65 @@
     "title": "FiddleBops",
     "description": "一个有趣的音乐游戏！",
     "sandboxAttributes": "allow-popups allow-scripts allow-same-origin allow-forms",
-    "referrerPolicy": "origin"
+    "referrerPolicy": "origin",
+    "loading": "eager",
+    "importance": "high"
   },
   "website": {
     "title": "FiddleBops - 音乐游戏",
-    "defaultLanguage": "zh",
-    "shareText": "来玩 FiddleBops 这个超棒的音乐游戏吧！[链接]"
+    "defaultLanguage": "en",
+    "branding": {
+      "logo": "/favicon.svg",
+      "alt": "FiddleBops Logo",
+      "width": 40,
+      "height": 40
+    },
+    "share": {
+      "platforms": ["twitter", "facebook", "whatsapp", "telegram", "copy"],
+      "fallbackText": "Check out this awesome music game!",
+      "hashtags": ["FiddleBops", "MusicGame", "Gaming"]
+    }
   },
   "i18n": {
     "zh": {
       "welcomeMessage": "欢迎来玩 FiddleBops！",
       "retryButton": "重试",
       "shareButton": "分享",
-      "loadingError": "游戏加载失败，请重试"
+      "loadingError": "游戏加载失败，请重试",
+      "nav": {
+        "howToPlay": "玩法介绍",
+        "features": "游戏特色",
+        "faq": "常见问题",
+        "openMenu": "打开菜单",
+        "selectLanguage": "选择语言"
+      },
+      "share": {
+        "title": "分享 FiddleBops",
+        "text": "来玩 FiddleBops 这个超棒的音乐游戏吧！",
+        "copied": "链接已复制",
+        "copyButton": "复制链接",
+        "closeButton": "关闭"
+      }
     },
     "en": {
       "welcomeMessage": "Welcome to FiddleBops!",
       "retryButton": "Retry",
       "shareButton": "Share",
-      "loadingError": "Game loading failed, please retry"
+      "loadingError": "Game loading failed, please retry",
+      "nav": {
+        "howToPlay": "How to Play",
+        "features": "Features",
+        "faq": "FAQ",
+        "openMenu": "Open Menu",
+        "selectLanguage": "Select Language"
+      },
+      "share": {
+        "title": "Share FiddleBops",
+        "text": "Check out this awesome music game FiddleBops!",
+        "copied": "Link copied",
+        "copyButton": "Copy link",
+        "closeButton": "Close"
+      }
     }
   }
 }
