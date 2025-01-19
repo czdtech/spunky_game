@@ -14,9 +14,7 @@ const t = i18next.t.bind(i18next);
 
 <Layout>
   <Navbar />
-  <main
-    class="min-h-screen bg-gradient-to-b from-indigo-50 via-purple-50 to-white"
-  >
+  <main class="min-h-screen bg-gradient-to-b from-purple-50 to-white">
     <!-- Hero Section with Game -->
     <section class="pt-24">
       <!-- Hero 内容 -->
@@ -28,204 +26,171 @@ const t = i18next.t.bind(i18next);
             {t("hero.title")}
           </h1>
         </div>
-        <p
-          class="text-lg sm:text-xl text-indigo-700 max-w-2xl mx-auto px-4 leading-relaxed"
-        >
+        <p class="text-lg sm:text-xl text-purple-600 max-w-2xl mx-auto px-4 leading-relaxed">
           {t("hero.description")}
         </p>
       </div>
 
       <!-- 游戏容器 -->
-      <div class="flex justify-center px-4 mb-8">
-        <div
-          class="game-container relative w-full max-w-[1200px] aspect-[16/9] bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden"
-          data-game-src={game.iframeSrc}
-        >
+      <div id="game-section" class="flex justify-center px-4">
+        <div class="w-full max-w-[1200px]">
           <div
-            id="start-container"
-            class="absolute inset-0 flex items-center justify-center z-20"
+            class="game-container relative aspect-[16/9] bg-white rounded-t-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden"
+            data-game-src={game.iframeSrc}
           >
-            <!-- 背景图片容器 -->
-            <div class="absolute inset-0">
-              <img
-                src="/FiddleBops.webp"
-                alt={t("title")}
-                class="w-full h-full object-cover"
-              />
-              <!-- 叠加模糊和暗色效果 -->
-              <div
-                class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-indigo-900/20 to-purple-900/20"
-              >
+            <div
+              id="start-container"
+              class="absolute inset-0 flex items-center justify-center z-20"
+            >
+              <!-- 背景图片容器 -->
+              <div class="absolute inset-0">
+                <img src="/FiddleBops.webp" alt={t("title")} class="w-full h-full object-cover" />
+                <!-- 叠加模糊和暗色效果 -->
+                <div
+                  class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-purple-900/20 to-violet-900/20"
+                >
+                </div>
+              </div>
+              <!-- 游戏说明和开始按钮 -->
+              <div class="relative z-10 text-center">
+                <!-- 开始按钮 -->
+                <button
+                  id="start-button"
+                  class="relative px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-white text-xl rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-105 transition-all duration-300 focus:ring-4 focus:ring-purple-200 focus:ring-offset-2 shadow-lg"
+                  aria-label={t("startButton")}
+                >
+                  {t("startButton")}
+                </button>
               </div>
             </div>
-            <!-- 开始按钮 -->
-            <button
-              id="start-button"
-              class="relative px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xl rounded-xl hover:from-indigo-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 focus:ring-4 focus:ring-purple-200 focus:ring-offset-2 shadow-lg"
-              aria-label={t("startButton")}
-            >
-              {t("startButton")}
-            </button>
+
+            <div class="absolute inset-0">
+              <iframe
+                id="game-frame"
+                class="w-full h-full"
+                title={t("title")}
+                sandbox={game.sandboxAttributes}
+                referrerpolicy="origin"
+                loading="lazy"
+                aria-label={`${t("title")} ${t("gameInterface")}`}></iframe>
+            </div>
+
+            <div id="error-container" class="hidden absolute inset-0 bg-white z-10">
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <p class="text-red-500 mb-4" role="alert">{t("loadingError")}</p>
+                <button
+                  id="retry-button"
+                  class="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-500 text-white rounded-xl hover:from-purple-600 hover:to-violet-600 transition-all focus:ring-2 focus:ring-purple-200 focus:ring-offset-2"
+                  aria-label={t("retryButton")}
+                >
+                  {t("retryButton")}
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="absolute inset-0">
-            <iframe
-              id="game-frame"
-              class="w-full h-full"
-              title={t("title")}
-              sandbox={game.sandboxAttributes}
-              referrerpolicy="origin"
-              loading="lazy"
-              aria-label={`${t("title")} ${t("gameInterface")}`}></iframe>
-          </div>
-
+          <!-- 玩法说明 -->
           <div
-            id="error-container"
-            class="hidden absolute inset-0 flex items-center justify-center bg-white z-10"
+            id="how-to-play"
+            class="bg-white rounded-b-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-8"
           >
-            <div class="text-center">
-              <p class="text-red-500 mb-4" role="alert">{t("loadingError")}</p>
-              <button
-                id="retry-button"
-                class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all focus:ring-2 focus:ring-purple-200 focus:ring-offset-2"
-                aria-label={t("retryButton")}
-              >
-                {t("retryButton")}
-              </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">
+              {t("howToPlay.title")}
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+              <!-- 基本操作 -->
+              <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <span
+                    class="w-7 h-7 bg-purple-100 rounded-full flex items-center justify-center mr-2"
+                  >
+                    <span class="text-purple-600">1</span>
+                  </span>
+                  {t("howToPlay.controls.basic.title")}
+                </h3>
+                <ul class="space-y-3">
+                  {
+                    ["point1", "point2", "point3"].map((point) => (
+                      <li class="flex items-start text-gray-600">
+                        <span class="w-4 h-4 bg-purple-100 rounded-full flex-shrink-0 flex items-center justify-center mt-1 mr-2">
+                          <span class="text-purple-600 text-xs">•</span>
+                        </span>
+                        <span class="text-sm">{t(`howToPlay.controls.basic.${point}`)}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- 进阶操作 -->
+              <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <span
+                    class="w-7 h-7 bg-purple-100 rounded-full flex items-center justify-center mr-2"
+                  >
+                    <span class="text-purple-600">2</span>
+                  </span>
+                  {t("howToPlay.controls.advanced.title")}
+                </h3>
+                <ul class="space-y-3">
+                  {
+                    ["point1", "point2", "point3"].map((point) => (
+                      <li class="flex items-start text-gray-600">
+                        <span class="w-4 h-4 bg-purple-100 rounded-full flex-shrink-0 flex items-center justify-center mt-1 mr-2">
+                          <span class="text-purple-600 text-xs">•</span>
+                        </span>
+                        <span class="text-sm">{t(`howToPlay.controls.advanced.${point}`)}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- 得分规则 -->
+              <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <span
+                    class="w-7 h-7 bg-purple-100 rounded-full flex items-center justify-center mr-2"
+                  >
+                    <span class="text-purple-600">3</span>
+                  </span>
+                  {t("howToPlay.scoring.title")}
+                </h3>
+                <ul class="space-y-3">
+                  {
+                    ["rule1", "rule2", "rule3"].map((rule) => (
+                      <li class="flex items-start text-gray-600">
+                        <span class="w-4 h-4 bg-purple-100 rounded-full flex-shrink-0 flex items-center justify-center mt-1 mr-2">
+                          <span class="text-purple-600 text-xs">•</span>
+                        </span>
+                        <span class="text-sm">{t(`howToPlay.scoring.${rule}`)}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 游戏说明区域 -->
-      <section
-        id="how-to-play"
-        class="py-16 bg-gradient-to-b from-white/80 to-white"
-      >
-        <div class="max-w-[1200px] mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
-            {t("howToPlay.title")}
-          </h2>
-
-          <!-- 游戏目标 -->
-          <div class="mb-16 max-w-3xl mx-auto">
-            <h3 class="text-2xl font-semibold text-gray-900 mb-6 text-center">
-              {t("howToPlay.objective.title")}
-            </h3>
-            <p class="text-lg text-gray-600 leading-relaxed mb-8 text-center">
-              {t("howToPlay.objective.description")}
-            </p>
-            <div class="grid sm:grid-cols-3 gap-6">
-              {
-                ["point1", "point2", "point3"].map((point, index) => (
-                  <div class="bg-indigo-50 rounded-xl p-6 text-center">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span class="text-xl font-semibold text-indigo-600">
-                        {index + 1}
-                      </span>
-                    </div>
-                    <p class="text-gray-700">
-                      {t(`howToPlay.objective.${point}`)}
-                    </p>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-
-          <!-- 基本操作 -->
-          <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-gray-900 mb-8 text-center">
-              {t("howToPlay.controls.title")}
-            </h3>
-            <div class="grid md:grid-cols-2 gap-8">
-              <div class="bg-white rounded-xl shadow-sm p-8">
-                <h4
-                  class="text-xl font-medium text-gray-800 mb-6 flex items-center"
-                >
-                  <span
-                    class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-3"
-                  >
-                    <span class="text-indigo-600">B</span>
-                  </span>
-                  {t("howToPlay.controls.basic.title")}
-                </h4>
-                <ul class="space-y-4">
-                  {
-                    ["point1", "point2", "point3"].map((point) => (
-                      <li class="flex items-start">
-                        <span class="w-6 h-6 bg-indigo-50 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 mr-3">
-                          <span class="text-indigo-600">•</span>
-                        </span>
-                        <span class="text-gray-600">
-                          {t(`howToPlay.controls.basic.${point}`)}
-                        </span>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-              <div class="bg-white rounded-xl shadow-sm p-8">
-                <h4
-                  class="text-xl font-medium text-gray-800 mb-6 flex items-center"
-                >
-                  <span
-                    class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-3"
-                  >
-                    <span class="text-indigo-600">A</span>
-                  </span>
-                  {t("howToPlay.controls.advanced.title")}
-                </h4>
-                <ul class="space-y-4">
-                  {
-                    ["point1", "point2", "point3"].map((point) => (
-                      <li class="flex items-start">
-                        <span class="w-6 h-6 bg-indigo-50 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 mr-3">
-                          <span class="text-indigo-600">•</span>
-                        </span>
-                        <span class="text-gray-600">
-                          {t(`howToPlay.controls.advanced.${point}`)}
-                        </span>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- 得分规则 -->
-          <div>
-            <h3 class="text-2xl font-semibold text-gray-900 mb-8 text-center">
-              {t("howToPlay.scoring.title")}
-            </h3>
-            <div
-              class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8 max-w-3xl mx-auto"
-            >
-              <ul class="space-y-6">
-                {
-                  ["rule1", "rule2", "rule3"].map((rule, index) => (
-                    <li class="flex items-start">
-                      <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600 mr-4 mt-0.5">
-                        {index + 1}
-                      </span>
-                      <p class="text-gray-700 leading-relaxed">
-                        {t(`howToPlay.scoring.${rule}`)}
-                      </p>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
+      <!-- 游戏特色展示 -->
+      <section id="features" class="mt-24">
+        <div class="w-full max-w-[1200px] mx-auto px-4">
+          <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-8">
+            <GameFeatures />
           </div>
         </div>
       </section>
 
-      <!-- 游戏特色展示 -->
-      <GameFeatures />
-
       <!-- FAQ 区域 -->
-      <FAQ />
+      <section id="faq" class="mt-24 mb-24">
+        <div class="w-full max-w-[1200px] mx-auto px-4">
+          <div class="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-8">
+            <FAQ />
+          </div>
+        </div>
+      </section>
     </section>
 
     <!-- 分享按钮 -->
@@ -252,21 +217,15 @@ const t = i18next.t.bind(i18next);
       <div
         class="share-menu hidden absolute bottom-full right-0 mb-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-3 shadow-lg"
       >
-        <div
-          class="a2a_kit a2a_kit_size_32 a2a_default_style flex flex-col gap-2"
-        >
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style flex flex-col gap-2">
           <a
             class="a2a_dd hover:scale-110 transition-transform"
             href="https://www.addtoany.com/share"></a>
-          <a class="a2a_button_facebook hover:scale-110 transition-transform"
-          ></a>
-          <a class="a2a_button_twitter hover:scale-110 transition-transform"
-          ></a>
-          <a class="a2a_button_whatsapp hover:scale-110 transition-transform"
-          ></a>
+          <a class="a2a_button_facebook hover:scale-110 transition-transform"></a>
+          <a class="a2a_button_twitter hover:scale-110 transition-transform"></a>
+          <a class="a2a_button_whatsapp hover:scale-110 transition-transform"></a>
           <a class="a2a_button_reddit hover:scale-110 transition-transform"></a>
-          <a class="a2a_button_linkedin hover:scale-110 transition-transform"
-          ></a>
+          <a class="a2a_button_linkedin hover:scale-110 transition-transform"></a>
         </div>
       </div>
     </div>
@@ -275,9 +234,7 @@ const t = i18next.t.bind(i18next);
 </Layout>
 
 <script>
-  const gameFrame = document.getElementById(
-    "game-frame"
-  ) as HTMLIFrameElement | null;
+  const gameFrame = document.getElementById("game-frame") as HTMLIFrameElement | null;
   const startContainer = document.getElementById("start-container");
   const startButton = document.getElementById("start-button");
   const errorContainer = document.getElementById("error-container");
@@ -348,12 +305,7 @@ const t = i18next.t.bind(i18next);
   // 点击其他区域关闭分享菜单
   document.addEventListener("click", (e) => {
     const target = e.target as Element;
-    if (
-      shareMenu &&
-      shareToggle &&
-      !shareMenu.contains(target) &&
-      !shareToggle.contains(target)
-    ) {
+    if (shareMenu && shareToggle && !shareMenu.contains(target) && !shareToggle.contains(target)) {
       shareMenu.classList.add("hidden");
     }
   });
@@ -361,11 +313,7 @@ const t = i18next.t.bind(i18next);
 
 <style>
   .gradient-title {
-    background: linear-gradient(
-      90deg,
-      rgb(79, 70, 229) 0%,
-      rgb(147, 51, 234) 100%
-    );
+    background: linear-gradient(90deg, rgb(126, 34, 206) 0%, rgb(139, 92, 246) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     padding-bottom: 0.2em;

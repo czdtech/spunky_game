@@ -3,21 +3,26 @@ import i18next from "../i18n/i18n";
 const t = i18next.t.bind(i18next);
 
 const currentPath = Astro.url.pathname;
+const currentLangCode = currentPath.split("/")[1] || "";
 
 const languages = [
   { code: "", name: "English", label: "English" },
   { code: "zh", name: "中文", label: "中文" },
 ];
 
-const currentLang =
-  languages.find((lang) => currentPath === (lang.code ? `/${lang.code}` : "/")) || languages[0];
+const currentLang = languages.find((lang) => lang.code === currentLangCode) || languages[0];
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm" id="navbar">
   <div class="flex justify-between items-center h-16 px-4 sm:px-6 max-w-[1200px] mx-auto">
     <!-- Logo -->
     <div class="flex-shrink-0">
-      <a href="/" class="text-2xl font-bold text-purple-600">FiddleBops</a>
+      <a
+        href={currentLang.code ? `/${currentLang.code}` : "/"}
+        class="text-2xl font-bold text-purple-600 hover:text-purple-700 transition-colors"
+      >
+        FiddleBops
+      </a>
     </div>
 
     <!-- Desktop Navigation -->
@@ -45,7 +50,7 @@ const currentLang =
       <div class="relative pl-8 border-l border-gray-200">
         <button
           type="button"
-          class="language-dropdown-button inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors focus:outline-none"
+          class="language-dropdown-button inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-md"
           aria-expanded="false"
         >
           <span>{currentLang.name}</span>
@@ -62,15 +67,17 @@ const currentLang =
         </button>
         <!-- Dropdown menu -->
         <div
-          class="language-dropdown-menu hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1"
+          class="language-dropdown-menu hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
           role="menu"
         >
           {
             languages.map((lang) => (
               <a
                 href={lang.code ? `/${lang.code}` : "/"}
-                class={`block px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
-                  currentLang.code === lang.code ? "text-purple-600 font-medium" : "text-gray-700"
+                class={`block px-4 py-2 text-sm hover:bg-purple-50 transition-colors ${
+                  currentLang.code === lang.code
+                    ? "text-purple-600 font-medium bg-purple-50"
+                    : "text-gray-700"
                 }`}
                 role="menuitem"
               >
@@ -86,7 +93,7 @@ const currentLang =
     <div class="sm:hidden">
       <button
         type="button"
-        class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-600 hover:bg-gray-100 transition-colors"
+        class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -114,19 +121,19 @@ const currentLang =
     <div class="px-2 pt-2 pb-3 space-y-1 bg-white">
       <a
         href="#how-to-play"
-        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+        class="text-gray-700 hover:text-purple-600 hover:bg-purple-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
       >
         {t("nav.howToPlay")}
       </a>
       <a
         href="#features"
-        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+        class="text-gray-700 hover:text-purple-600 hover:bg-purple-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
       >
         {t("nav.features")}
       </a>
       <a
         href="#faq"
-        class="text-gray-700 hover:text-purple-600 block px-3 py-2 text-base font-medium transition-colors"
+        class="text-gray-700 hover:text-purple-600 hover:bg-purple-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
       >
         {t("nav.faq")}
       </a>
@@ -144,8 +151,8 @@ const currentLang =
                   href={lang.code ? `/${lang.code}` : "/"}
                   class={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     currentLang.code === lang.code
-                      ? "bg-purple-600 text-white"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-purple-100 text-purple-600"
+                      : "text-gray-700 hover:bg-purple-50"
                   }`}
                 >
                   {lang.name}
@@ -215,6 +222,22 @@ const currentLang =
     link.addEventListener("click", () => {
       mobileMenu?.classList.add("hidden");
       mobileMenuButton?.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (anchor instanceof HTMLAnchorElement) {
+        const href = anchor.getAttribute("href");
+        if (href) {
+          const target = document.querySelector(href);
+          target?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }
     });
   });
 </script>
